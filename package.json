@@ -3,9 +3,6 @@
   "version": "3.0.18",
   "description": "Date range picker component",
   "main": "daterangepicker.js",
-  "scripts": {
-    "artifactregistry-login": "npx google-artifactregistry-auth .npmrc"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chattermill/daterangepicker.git"

@@ -581,7 +581,7 @@ window.rangePicker = function (dateFns, $) {
         this.container.find('input[name=daterangepicker_end]').val(dateFns.format(this.endDate, this.locale.inputFormat));
       }
 
-      if (this.singleDatePicker || (this.endDate && (dateFns.isBefore(this.startDate, this.endDate) || this.startDate.isSame(this.endDate)))) {
+      if (this.singleDatePicker || (this.endDate && (dateFns.isBefore(this.startDate, this.endDate) || dateFns.isSameDay(this.startDate, this.endDate)))) {
         this.container.find('button.applyBtn').prop('disabled', false);
       } else {
         this.container.find('button.applyBtn').prop('disabled', true);
@@ -750,7 +750,7 @@ window.rangePicker = function (dateFns, $) {
       }
 
       //if a new date range was selected, invoke the user callback function
-      if (!this.startDate.isSame(this.oldStartDate) || !this.endDate.isSame(this.oldEndDate))
+      if (!dateFns.isSameDay(this.startDate, this.oldStartDate) || !dateFns.isSameDay(this.endDate, this.oldEndDate))
         this.callback(this.startDate.clone(), this.endDate.clone(), this.chosenLabel);
 
       //if picker is attached to a text input, update it

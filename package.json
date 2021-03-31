@@ -1,6 +1,6 @@
 {
   "name": "cm-daterangepicker",
-  "version": "3.0.17",
+  "version": "3.0.18",
   "description": "Date range picker component",
   "main": "daterangepicker.js",
   "style": "daterangepicker.css",

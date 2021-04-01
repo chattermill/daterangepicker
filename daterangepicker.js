@@ -1159,9 +1159,7 @@
       var startDateInputMaxLength = 10;
 
       // eslint-disable-next-line no-undef
-      var inputMask = new Inputmask({
-        alias: 'datetime',
-        inputFormat: 'dd.mm.yyyy',
+      var inputMask = new Inputmask('99.99.9999', {
         placeholder: '__.__.____',
         positionCaretOnClick: 'none',
         oncomplete: function (element) {
@@ -1170,9 +1168,25 @@
             endDateInput.setSelectionRange(0, 0);
           }
           if (endDateInput === element.target) {
-            var end = moment.utc($(endDateInput).val(), _this.locale.inputFormat);
-            _this.setEndDate(end);
-            _this.updateCalendars();
+            var format = _this.locale.inputFormat;
+
+            var start = moment.utc($(startDateInput).val(), format);
+            var end = moment.utc($(endDateInput).val(), format);
+
+            if (!end.isValid()) {
+              end = moment();
+
+              if (start.isAfter(end)) {
+                endDateInput.value = start.format(format);
+              } else {
+                endDateInput.value = end.format(format);
+              }
+
+              _this.formInputsChanged(element);
+            } else {
+              _this.setEndDate(end);
+              _this.updateCalendars();
+            }
           }
         }
       });
